@@ -8,6 +8,7 @@ from cogs.commands.mod import Mod
 from cogs.commands.info import Info
 
 from cogs.listeners.userjoinleave import UserJoinLeave
+from cogs.listeners.filter import Filter
 
 description = """lammy bot v4"""
 
@@ -23,6 +24,7 @@ bot.add_cog(Info(bot))
 
 # Listener Cogs
 bot.add_cog(UserJoinLeave(bot))
+bot.add_cog(Filter(bot))
 
 # Events
 @bot.event

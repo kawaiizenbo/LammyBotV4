@@ -7,6 +7,10 @@ class UserJoinLeave(commands.Cog):
         self._last_member = None
 
     @commands.Cog.listener()
+    async def on_ready(self):
+        print(f'{self} has been loaded') 
+
+    @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
         server = member.guild
 
