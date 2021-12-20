@@ -3,7 +3,6 @@ import random
 import discord
 from discord.ext import commands
 
-from cogs.commands.misc import Misc
 from cogs.commands.mod import Mod
 from cogs.commands.info import Info
 
@@ -18,7 +17,6 @@ intents.members = True
 bot = commands.Bot(command_prefix="!", description=description, intents=intents)
 
 # Command Cogs
-bot.add_cog(Misc(bot))
 bot.add_cog(Mod(bot))
 bot.add_cog(Info(bot))
 
