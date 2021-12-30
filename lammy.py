@@ -1,20 +1,23 @@
-import random
-
 import discord
-from discord.ext import commands
+
+#from discord.ext
 
 from cogs.commands.mod import Mod
 from cogs.commands.info import Info
 
 from cogs.listeners.userjoinleave import UserJoinLeave
 from cogs.listeners.filter import Filter
+from cogs.listeners.logger import Logger
+
+from config import cfg
 
 description = """lammy bot v4"""
 
 intents = discord.Intents.default()
 intents.members = True
+intents.messages = True
 
-bot = commands.Bot(command_prefix="!", description=description, intents=intents)
+bot = discord.Bot(intents = intents)
 
 # Command Cogs
 bot.add_cog(Mod(bot))
@@ -23,6 +26,7 @@ bot.add_cog(Info(bot))
 # Listener Cogs
 bot.add_cog(UserJoinLeave(bot))
 bot.add_cog(Filter(bot))
+bot.add_cog(Logger(bot))
 
 # Events
 @bot.event
@@ -31,4 +35,4 @@ async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id})")
     print("------")
 
-bot.run(open("TOKEN.txt", "r").read())
+bot.run(cfg["TOKEN"])

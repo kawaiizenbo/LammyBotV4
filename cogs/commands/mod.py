@@ -1,5 +1,9 @@
 import discord
+from discord import member
+from discord import message
 from discord.ext import commands
+from discord.commands import slash_command, Option
+from config import cfg
 
 class Mod(commands.Cog):
     def __init__(self, bot):
@@ -10,38 +14,38 @@ class Mod(commands.Cog):
     async def on_ready(self):
         print(f'{self} has been loaded') 
 
-    @commands.command(name="kick")
+    @slash_command(name="kick", guild_ids=[cfg["GUILD_ID"]])
     @commands.has_permissions(kick_members = True)
-    async def kick(self, ctx, user: discord.User, reason: str = "No reason specified"):
+    async def kick(self, ctx, user: Option(discord.User, "User to kick"), reason: Option(str, "Reason of kick", required=False, default="No reason specified")):
         """Kick a specified user."""
-        await ctx.guild.kick(user = user, reason = f"Kicked by {ctx.message.author.name}#{ctx.message.author.discriminator}: {reason}")
+        await ctx.guild.kick(user = user, reason = f"Kicked by {ctx.author}: {reason}")
         embed = discord.Embed()
-        embed.color = discord.Colour.red()
+        embed.color = 0xBF005F
         embed.title = "Kicked user."
         embed.description = f"`{user.name}#{user.discriminator}` was kicked\nReason: `{reason}`\nUser ID: `{user.id}`"
         embed.set_thumbnail(url = user.avatar.url)
-        await ctx.send(embed = embed)
+        await ctx.respond(embed = embed)
 
-    @commands.command(name="ban")
+    @slash_command(name="ban", guild_ids=[cfg["GUILD_ID"]])
     @commands.has_permissions(ban_members = True)
-    async def ban(self, ctx, user: discord.User, reason: str = "No reason specified"):
+    async def ban(self, ctx, user: Option(discord.User, "User to ban"), reason: Option(str, "Reason of ban", required=False, default="No reason specified")):
         """Ban a specified user."""
-        await ctx.guild.ban(user = user, delete_message_days = 0, reason = f"Banned by {ctx.message.author.name}#{ctx.message.author.discriminator}: {reason}")
+        await ctx.guild.ban(user = user, delete_message_days = 0, reason = f"Banned by {ctx.author}: {reason}")
         embed = discord.Embed()
-        embed.color = discord.Colour.red()
+        embed.color = 0xBF005F
         embed.title = "Banned user."
         embed.description = f"`{user.name}#{user.discriminator}` was banned\nReason: `{reason}`\nUser ID: `{user.id}`"
         embed.set_thumbnail(url = user.avatar.url)
-        await ctx.send(embed = embed)
+        await ctx.respond(embed = embed)
 
-    @commands.command(name="unban")
+    @slash_command(name="unban", guild_ids=[cfg["GUILD_ID"]])
     @commands.has_permissions(ban_members = True)
-    async def unban(self, ctx, user: discord.User, reason: str = "No reason specified"):
+    async def unban(self, ctx, user: Option(discord.User, "User to unban"), reason: Option(str, "Reason of unban", required=False, default="No reason specified")):
         """Unban a specified user."""
-        await ctx.guild.unban(user = user, reason = f"Unbanned by {ctx.message.author.name}#{ctx.message.author.discriminator}: {reason}")
+        await ctx.guild.unban(user = user, reason = f"Unbanned by {ctx.author}: {reason}")
         embed = discord.Embed()
-        embed.color = discord.Colour.red()
+        embed.color = 0xBF005F
         embed.title = "Unbanned user."
         embed.description = f"`{user.name}#{user.discriminator}` was unbanned\nReason: `{reason}`\nUser ID: `{user.id}`"
         embed.set_thumbnail(url = user.avatar.url)
-        await ctx.send(embed = embed)
+        await ctx.respond(embed = embed)

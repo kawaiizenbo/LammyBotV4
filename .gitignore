@@ -113,5 +113,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# do not post the token
+# do not post db shit
 /TOKEN.txt
+/config.json
+/db/

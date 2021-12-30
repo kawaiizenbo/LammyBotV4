@@ -1,4 +1,5 @@
 import discord
+import re
 from discord.ext import commands
 
 class Filter(commands.Cog):
@@ -12,5 +13,5 @@ class Filter(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.content.__contains__("discord.gg/"):
+        if re.search("(?:https?://)?discord(?:app)?\.(?:com/invite|gg)/[a-zA-Z0-9]+/?", message.content) != None:
             await message.delete()
