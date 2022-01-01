@@ -54,6 +54,18 @@ class Info(commands.Cog):
         embed.add_field(name="Permissions", value=permissions, inline=False)
         await ctx.respond(embed = embed)
 
+    @slash_command(name="riitag", guild_ids=[cfg["GUILD_ID"]])
+    async def riitag(self, ctx, member: Option(discord.Member, "User to see RiiTag of")):
+        """Gets user's RiiTag"""
+        user = member or ctx.author
+        embed = discord.Embed(
+            color = 0xBF005F,
+            title = f"RiiTag",
+        )
+        embed.set_author(name=user, icon_url=user.display_avatar)
+        embed.set_image(url=f"https://tag.rc24.xyz/{user.id}/tag.max.png")
+        await ctx.respond(embed = embed)
+
     @slash_command(name="about", guild_ids=[cfg["GUILD_ID"]])
     async def about(self, ctx):
         """Get bot info."""
