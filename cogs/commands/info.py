@@ -79,3 +79,8 @@ class Info(commands.Cog):
         embed.add_field(name="Latency", value=round(self.bot.latency*1000, 1))
         embed.add_field(name="Pycord Version", value=discord.__version__)
         await ctx.respond(embed = embed)
+
+    @slash_command(name="tnt", guild_ids=[cfg["GUILD_ID"]])
+    async def tnt(self, ctx):
+        """dumb."""
+        await ctx.respond(f"BOOOOOOOOOOOM!!!\n\n\n\n{ctx.user.mention} you died by an explosion\n\n\n\nThe WALMART is on fire\n\n\n\n{ctx.user.mention} you blew up {ctx.guild.name}")
