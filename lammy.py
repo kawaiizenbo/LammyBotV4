@@ -1,8 +1,5 @@
 import discord
 
-#from discord.ext
-
-from cogs.commands.mod import Mod
 from cogs.commands.info import Info
 
 from cogs.listeners.userjoinleave import UserJoinLeave
@@ -20,7 +17,6 @@ intents.messages = True
 bot = discord.Bot(intents = intents)
 
 # Command Cogs
-bot.add_cog(Mod(bot))
 bot.add_cog(Info(bot))
 
 # Listener Cogs
