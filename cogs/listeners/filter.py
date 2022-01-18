@@ -14,7 +14,7 @@ class Filter(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if re.search("(?:https?://)?discord(?:app)?\.(?:com/invite|gg)/[a-zA-Z0-9]+/?", message.content) != None & message.author != message.guild.owner:
+        if re.search("(?:https?://)?discord(?:app)?\.(?:com/invite|gg)/[a-zA-Z0-9]+/?", message.content) != None and message.author != message.guild.owner:
             embed = discord.Embed(
                 color = discord.Colour.red(),
                 title = "Invite link removed",
