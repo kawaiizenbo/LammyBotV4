@@ -18,7 +18,7 @@ class Info(commands.Cog):
         startTime = time.time()
 
     @slash_command(name="userinfo", guild_ids=[cfg["GUILD_ID"]])
-    async def userinfo(self, ctx, member: Option(discord.Member, "User to see info of")):
+    async def userinfo(self, ctx, member: Option(discord.Member, "User to see info of", required=False)):
         """Gets user info."""
         user = member or ctx.author
         cd: str = user.created_at.strftime("%Y %b %d %H:%M:%S")
@@ -54,7 +54,7 @@ class Info(commands.Cog):
         embed.add_field(name="Permissions", value=permissions, inline=False)
         await ctx.respond(embed = embed)
 
-    @slash_command(name="riitag", guild_ids=[cfg["GUILD_ID"]])
+    @slash_command(name="riitag", guild_ids=[cfg["GUILD_ID"]], required=False)
     async def riitag(self, ctx, member: Option(discord.Member, "User to see RiiTag of")):
         """Gets user's RiiTag"""
         user = member or ctx.author
@@ -79,6 +79,15 @@ class Info(commands.Cog):
         embed.add_field(name="Latency", value=round(self.bot.latency*1000, 1))
         embed.add_field(name="Pycord Version", value=discord.__version__)
         await ctx.respond(embed = embed)
+    
+    @slash_command(name="kill", guild_ids=[cfg["GUILD_ID"]])
+    async def about(self, ctx):
+        """stop bot (bot owner only)"""
+        if ctx.author != self.bot.owner:
+            await ctx.respond("You arent allowed to do that.")
+        else:
+            await ctx.respond("Lammy fell out of this world.")
+            exit(0)
 
     @slash_command(name="tnt", guild_ids=[cfg["GUILD_ID"]])
     async def tnt(self, ctx):
