@@ -83,11 +83,16 @@ class Info(commands.Cog):
     @slash_command(name="kill", guild_ids=[cfg["GUILD_ID"]])
     async def about(self, ctx):
         """stop bot (bot owner only)"""
-        if ctx.author != self.bot.owner:
+        if ctx.author.id != self.bot.owner_id:
             await ctx.respond("You arent allowed to do that.")
         else:
             await ctx.respond("Lammy fell out of this world.")
             exit(0)
+
+    @slash_command(name="source", guild_ids=[cfg["GUILD_ID"]])
+    async def about(self, ctx):
+        """show bot source"""
+        await ctx.respond("<https://github.com/kawaiizenbo/LammyBotV4>")
 
     @slash_command(name="tnt", guild_ids=[cfg["GUILD_ID"]])
     async def tnt(self, ctx):
